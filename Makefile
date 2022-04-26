@@ -664,8 +664,8 @@ caravel_timing_typ: ./def/caravel.def ./sdc/caravel.sdc ./verilog/gl/caravel.v c
 	read_verilog ./verilog/gl/spare_logic_block.v;\
 	read_verilog ./verilog/gl/chip_io.v;\
 	read_verilog ./verilog/gl/caravel.v;\
-	# read_verilog /mnt/c/Users/Ismael/Efabless-wsl/caravel_tutorial/caravel_example/verilog/gl/user_project_wrapper.v;\
-	# read_verilog /mnt/c/Users/Ismael/Efabless-wsl/caravel_tutorial/caravel_example/verilog/gl/user_proj_example.v;\
+	read_verilog /mnt/c/Users/Ismael/Efabless-wsl/caravel_tutorial/caravel_example/verilog/gl/user_project_wrapper.v;\
+	read_verilog /mnt/c/Users/Ismael/Efabless-wsl/caravel_tutorial/caravel_example/verilog/gl/SPM_example.v;\
 	link_design caravel;\
 	read_spef -path soc/DFFRAM_0 $(MCW_ROOT)/spef/DFFRAM.spef;\
 	read_spef -path soc/core $(MCW_ROOT)/spef/mgmt_core.spef;\
@@ -753,8 +753,8 @@ caravel_timing_typ: ./def/caravel.def ./sdc/caravel.sdc ./verilog/gl/caravel.v c
 	read_spef -path gpio_defaults_block_35 ./spef/gpio_defaults_block.spef;\
 	read_spef -path gpio_defaults_block_36 ./spef/gpio_defaults_block.spef;\
 	read_spef -path gpio_defaults_block_37 ./spef/gpio_defaults_block.spef;\
-	# read_spef -path mprj /mnt/c/Users/Ismael/Efabless-wsl/caravel_tutorial/caravel_example/spef/user_project_wrapper.spef;\
-	# read_spef -path mprj/mprj /mnt/c/Users/Ismael/Efabless-wsl/caravel_tutorial/caravel_example/spef/user_proj_example.spef;\
+	read_spef -path mprj /mnt/c/Users/Ismael/Efabless-wsl/caravel_tutorial/caravel_example/spef/user_project_wrapper.spef;\
+	read_spef -path mprj/mprj /mnt/c/Users/Ismael/Efabless-wsl/caravel_tutorial/caravel_example/spef/SPM_example.spef;\
 	read_spef ./spef/caravel.spef;\
 	read_sdc -echo ./sdc/caravel.sdc;\
 	report_checks -path_delay min -fields {slew cap input nets fanout} -format full_clock_expanded -group_count 50;\
@@ -781,7 +781,7 @@ caravel_timing_typ: ./def/caravel.def ./sdc/caravel.sdc ./verilog/gl/caravel.v c
 	report_checks -to flash_csb -group_count 1;\
 	report_checks -to flash_io0 -group_count 1;\
 	" > /mnt/c/Users/Ismael/Efabless-wsl/caravel_tutorial/caravel_example/caravel/def/tmp/caravel_timing_typ.tcl 
-	docker run -it -v $(OPENLANE_ROOT):/openlane -v $(PDK_ROOT):$(PDK_ROOT) -v $(PWD):/caravel -v /mnt/c/Users/Ismael/Efabless-wsl/caravel_tutorial/caravel_example/caravel/def/:/def -v /mnt/:/mnt -e PDK_ROOT=$(PDK_ROOT) -u $(shell id -u $(USER)):$(shell id -g $(USER)) $(OPENLANE_IMAGE_NAME) \
+	docker run -v $(OPENLANE_ROOT):/openlane -v $(PDK_ROOT):$(PDK_ROOT) -v $(PWD):/caravel -v /mnt/c/Users/Ismael/Efabless-wsl/caravel_tutorial/caravel_example/caravel/def/:/def -v /mnt/:/mnt -e PDK_ROOT=$(PDK_ROOT) -u $(shell id -u $(USER)):$(shell id -g $(USER)) $(OPENLANE_IMAGE_NAME) \
 	bash -c "cd /mnt/c/Users/Ismael/Efabless-wsl/caravel_tutorial/caravel_example/caravel/; sta -exit ./def/tmp/caravel_timing_typ.tcl | tee ./signoff/caravel/caravel_timing_typ.log"
 
 caravel_timing_slow: ./def/caravel.def ./sdc/caravel.sdc ./verilog/gl/caravel.v check-mcw
